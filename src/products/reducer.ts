@@ -1,11 +1,18 @@
 import { PRODUCTS } from './actionTypes';
 
+export interface ProductsState {
+  loading: boolean,
+  byId: {},
+  allIds: string[],
+  selectedProducts: {},
+  error: null | string,
+}
+
 const initialState = {
   loading: false,
   byId: {},
   allIds: [],
-  // maybe this need to be moved to another reducer - "basket"
-  inBasket: {},
+  selectedProducts: {},
   error: null,
 };
 
@@ -18,14 +25,14 @@ export default function productsReducer(state = initialState, action: any) {
         loading: true,
       };
     case PRODUCTS.GET_PRODUCTS_SUCCESS:
+      const { byId, allIds } = action.products;
       return {
         ...state,
         byId: {
           ...state.byId,
-          // add util function to generate byId
-          ...action.products,
+          ...byId,
         },
-        allIds: [...state.allIds, action.products],
+        allIds: [...state.allIds, ...allIds],
         loading: false,
       };
     case PRODUCTS.GET_PRODUCTS_FAILURE:
