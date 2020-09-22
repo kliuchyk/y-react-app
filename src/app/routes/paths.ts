@@ -2,8 +2,8 @@ import pathCreator from '../../utils/pathCreator';
 
 const RoutePaths = {
   _: pathCreator('/'),
-  Basket: {
-    _: pathCreator('/basket'),
+  Cart: {
+    _: pathCreator('/cart'),
   },
   Products: {
     _: pathCreator('/products'),
