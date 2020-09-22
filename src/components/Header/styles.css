@@ -5,3 +5,12 @@
 .hidden {
   display: none;
 }
+
+.anticon-shopping-cart {
+  font-size: 28px;
+}
+
+.ant-page-header-heading-extra {
+  align-items: center;
+  display: flex;
+}
