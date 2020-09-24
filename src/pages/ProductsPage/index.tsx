@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { requestProducts } from '../../products/actions';
 import { RootState } from '../../app/redux/rootReducer';
-import ProductCard, { Product } from '../../components/ProductCard';
+import ProductCard from '../../components/ProductCard';
+import { Product } from '../../products/reducer';
 import './styles.css';
 
 const selectProducts = (state: RootState) => state.products;
@@ -22,19 +24,21 @@ function ProductsPage() {
 
   return (
     <>
-      <h1 className='page-title'>PRODUCTS</h1>
+      <h1 className="page-title">PRODUCTS</h1>
       <div className="container">
         {productsCopy.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            isEditable={product.isEditable}
-            name={product.name}
-            price={product.price}
-            origin={product.origin}
-            createdAt={product.createdAt}
-            updatedAt={product.updatedAt}
-          />
+          <Link to={`products/${product.id}`} key={product.id}>
+            <ProductCard
+              id={product.id}
+              isEditable={product.isEditable}
+              name={product.name}
+              price={product.price}
+              origin={product.origin}
+              createdAt={product.createdAt}
+              updatedAt={product.updatedAt}
+              hoverable
+            />
+          </Link>
         ))}
       </div>
     </>

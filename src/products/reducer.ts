@@ -1,14 +1,35 @@
-import { PRODUCTS } from './actionTypes';
+import { PRODUCT_ACTION_TYPES } from './actionTypes';
 
-export interface ProductsState {
-  loading: boolean,
-  byId: {},
-  allIds: string[],
-  selectedProducts: {},
-  error: null | string,
+export interface Product {
+  isEditable: boolean;
+  id: string;
+  name: string;
+  price: number;
+  origin: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-const initialState = {
+export interface ProductsState {
+  loading: boolean;
+  byId: {};
+  allIds: string[];
+  selectedProducts: {};
+  error: null | string;
+}
+
+export interface DetailsState {
+  loading: boolean;
+  error: null | string;
+  product: Product;
+}
+
+export interface RootState {
+  products: ProductsState;
+  details: DetailsState;
+}
+
+const initialProductsState = {
   loading: false,
   byId: {},
   allIds: [],
@@ -16,15 +37,21 @@ const initialState = {
   error: null,
 };
 
-export default function productsReducer(state = initialState, action: any) {
+const initialDetailsState = {
+  loading: false,
+  error: null,
+  product: null,
+};
+
+export function productsReducer(state = initialProductsState, action: any) {
   switch (action.type) {
-    case PRODUCTS.GET_PRODUCTS_REQUEST:
+    case PRODUCT_ACTION_TYPES.GET_PRODUCTS_REQUEST:
       return {
         ...state,
         error: null,
         loading: true,
       };
-    case PRODUCTS.GET_PRODUCTS_SUCCESS:
+    case PRODUCT_ACTION_TYPES.GET_PRODUCTS_SUCCESS:
       const { byId, allIds } = action.products;
       return {
         ...state,
@@ -35,11 +62,36 @@ export default function productsReducer(state = initialState, action: any) {
         allIds: [...state.allIds, ...allIds],
         loading: false,
       };
-    case PRODUCTS.GET_PRODUCTS_FAILURE:
+    case PRODUCT_ACTION_TYPES.GET_PRODUCTS_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.error,
+      };
+    default:
+      return state;
+  }
+}
+
+export function productDetailsReducer(state = initialDetailsState, action: any) {
+  switch (action.type) {
+    case PRODUCT_ACTION_TYPES.DETAILS_LOADING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case PRODUCT_ACTION_TYPES.DETAILS_FETCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        product: action.payload,
+      };
+    case PRODUCT_ACTION_TYPES.DETAILS_FETCH_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

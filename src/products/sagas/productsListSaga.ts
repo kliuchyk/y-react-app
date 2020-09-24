@@ -1,8 +1,8 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 
-import { PRODUCTS } from './actionTypes';
-import { getProducts } from '../api/products';
-import { setError, setProducts } from './actions';
+import { PRODUCT_ACTION_TYPES } from '../actionTypes';
+import { getProducts } from '../../api/products';
+import { setError, setProducts } from '../actions';
 
 function* productsSagaWorker() {
   try {
@@ -14,5 +14,5 @@ function* productsSagaWorker() {
 }
 
 export default function* productsSagaWatcher() {
-  yield takeEvery(PRODUCTS.GET_PRODUCTS_REQUEST, productsSagaWorker);
+  yield takeEvery(PRODUCT_ACTION_TYPES.GET_PRODUCTS_REQUEST, productsSagaWorker);
 }

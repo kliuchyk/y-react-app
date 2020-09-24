@@ -1,9 +1,15 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+
+import ProductDetails from '../../containers/ProductDetails';
+import './styles.css';
 
 const ProductDetailsPage: React.FC = () => {
+  const { productId } = useParams<{ productId: string }>();
+
   return (
-    <div>
-      <h1>ProductDetailsPage</h1>
+    <div className="container">
+      <ProductDetails productId={productId} />
     </div>
   );
 };

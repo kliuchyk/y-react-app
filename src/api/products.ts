@@ -10,7 +10,7 @@ export const getProducts = async () => {
   return dataToSave;
 };
 
-export const getProductById = async (id: number) => {
+export const getProductById = async (id: string) => {
   const response = await fetch(`${baseURL}/products/${id}`);
   const data = await response.json();
 
