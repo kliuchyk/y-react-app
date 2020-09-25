@@ -1,9 +1,14 @@
 import React from 'react';
 
+import CartProducts from '../../containers/CartProducts';
+import './styles.css'
+
 const ShoppingCartPage: React.FC = () => {
+
   return (
-    <div>
+    <div className='cart-container'>
       <h1>SHOPPING CART</h1>
+      <CartProducts />
     </div>
   );
 };

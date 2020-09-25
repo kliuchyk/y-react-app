@@ -8,6 +8,12 @@ export interface Product {
   origin: string;
   createdAt: string;
   updatedAt: string;
+  amount?: number;
+  totalPrice?: number;
+}
+
+export interface Products {
+  [key: string]: Product;
 }
 
 export interface ProductsState {

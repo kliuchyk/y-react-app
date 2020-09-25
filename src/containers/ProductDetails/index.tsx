@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { detailsLoading } from '../../products/actions';
 import ProductCard from '../../components/ProductCard';
-import { DetailsState, Product, RootState } from '../../products/reducer';
+import { RootState } from '../../products/reducer';
 
 export interface ProductDetailsProps {
   productId: string;
