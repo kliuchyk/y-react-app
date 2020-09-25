@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Space, Button } from 'antd';
+import { Table, Space, Button, Input } from 'antd';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 import {
@@ -12,7 +12,9 @@ import {
   deleteFromCart,
   decrementProduct,
   incrementProduct,
+  changeProductCount,
 } from '../../cart/actions';
+import './styles.css'
 
 export default function ProductsTable(props: any) {
   const productsCount = useSelector(selectPickedProductsCount);
@@ -44,7 +46,13 @@ export default function ProductsTable(props: any) {
           <MinusCircleOutlined
             onClick={() => dispatch(decrementProduct(record.id))}
           />
-          <span>{record.amount}</span>
+          <Input
+            className='count-input'
+            value={record.amount}
+            onChange={(e) =>
+              dispatch(changeProductCount(parseInt(e.target.value), record.id))
+            }
+          />
           <PlusCircleOutlined
             onClick={() => dispatch(incrementProduct(record.id))}
           />

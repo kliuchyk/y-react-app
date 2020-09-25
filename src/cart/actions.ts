@@ -14,3 +14,9 @@ export const deleteFromCart = (productId: string) => ({
   type: CART_ACTION_TYPES.DELETE_FROM_CART,
   productId,
 });
+
+export const changeProductCount = (count: number, productId: string) => ({
+  type: CART_ACTION_TYPES.CHANGE_PRODUCT_COUNT,
+  count,
+  productId,
+})

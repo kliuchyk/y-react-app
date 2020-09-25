@@ -13,6 +13,7 @@ export interface CartProduct extends Product {
 export interface CartAction {
   type: string;
   productId: string;
+  count?: number;
 }
 
 const initialState: CartState = {};
@@ -34,6 +35,11 @@ export const cartReducer = (state = initialState, action: CartAction) => {
       const { [action.productId]: productToDelete, ...rest } = state;
       return {
         ...rest,
+      };
+    case CART_ACTION_TYPES.CHANGE_PRODUCT_COUNT:
+      return {
+        ...state,
+        [action.productId]: action.count,
       };
     default:
       return state;
