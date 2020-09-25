@@ -1,15 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Table } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { Table, Space, Button } from 'antd';
 
 import {
   selectPickedProductsCount,
   selectCartTotalPrice,
 } from '../../app/redux/selectors';
+import { Product } from '../../products/reducer';
+import { deleteFromCart } from '../../cart/actions';
 
 export default function ProductsTable(props: any) {
   const productsCount = useSelector(selectPickedProductsCount);
   const totalPrice = useSelector(selectCartTotalPrice);
+  const dispatch = useDispatch();
 
   const columns = [
     {
@@ -36,6 +39,18 @@ export default function ProductsTable(props: any) {
       title: 'Total price for product',
       dataIndex: 'totalPrice',
       key: 'totalPrice',
+    },
+    {
+      title: 'Remove from cart',
+      dataIndex: 'delete',
+      key: 'delete',
+      render: (text: string, record: Product) => (
+        <Space size="middle">
+          <Button danger onClick={() => dispatch(deleteFromCart(record.id))}>
+            Delete
+          </Button>
+        </Space>
+      ),
     },
   ];
 

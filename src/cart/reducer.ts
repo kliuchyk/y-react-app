@@ -25,6 +25,11 @@ export const cartReducer = (state = initialState, action: any) => {
         ...state,
         [product]: state[product] > 0 ? state[product] - 1 : 0,
       };
+    case CART_ACTION_TYPES.DELETE_FROM_CART:
+      const { [action.productId]: productToDelete, ...rest } = state;
+      return {
+        ...rest,
+      };
     default:
       return state;
   }
