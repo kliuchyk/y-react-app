@@ -1,13 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Space, Button } from 'antd';
+import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 import {
   selectPickedProductsCount,
   selectCartTotalPrice,
 } from '../../app/redux/selectors';
 import { Product } from '../../products/reducer';
-import { deleteFromCart } from '../../cart/actions';
+import {
+  deleteFromCart,
+  decrementProduct,
+  incrementProduct,
+} from '../../cart/actions';
 
 export default function ProductsTable(props: any) {
   const productsCount = useSelector(selectPickedProductsCount);
@@ -34,6 +39,17 @@ export default function ProductsTable(props: any) {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
+      render: (text: string, record: Product) => (
+        <Space size="middle">
+          <MinusCircleOutlined
+            onClick={() => dispatch(decrementProduct(record.id))}
+          />
+          <span>{record.amount}</span>
+          <PlusCircleOutlined
+            onClick={() => dispatch(incrementProduct(record.id))}
+          />
+        </Space>
+      ),
     },
     {
       title: 'Total price for product',

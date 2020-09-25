@@ -10,9 +10,14 @@ export interface CartProduct extends Product {
   totalPrice: number;
 }
 
+export interface CartAction {
+  type: string;
+  productId: string;
+}
+
 const initialState: CartState = {};
 
-export const cartReducer = (state = initialState, action: any) => {
+export const cartReducer = (state = initialState, action: CartAction) => {
   switch (action.type) {
     case CART_ACTION_TYPES.INCREMENT_PRODUCT:
       return {
@@ -23,7 +28,7 @@ export const cartReducer = (state = initialState, action: any) => {
       const product = action.productId;
       return {
         ...state,
-        [product]: state[product] > 0 ? state[product] - 1 : 0,
+        [product]: state[product] > 1 ? state[product] - 1 : 1,
       };
     case CART_ACTION_TYPES.DELETE_FROM_CART:
       const { [action.productId]: productToDelete, ...rest } = state;
