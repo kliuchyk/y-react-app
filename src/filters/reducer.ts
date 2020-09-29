@@ -15,8 +15,10 @@ export interface FiltersState {
 
 export interface FilterAction {
   type: string;
-  origins: [] | string[];
-  price: [] | number[];
+  filters: {
+    origins: [] | string[];
+    price: [] | number[];
+  };
 }
 
 export const initialFiltersState: FiltersState = {
@@ -26,15 +28,11 @@ export const initialFiltersState: FiltersState = {
 
 export const filterReducer = (state = initialFiltersState, action: FilterAction) => {
   switch (action.type) {
-    case FILTER_ACTION_TYPES.CHANGE_ORIGINS_FILTER:
+    case FILTER_ACTION_TYPES.CHANGE_FILTERS:
+      const { origins, price } = action.filters;
       return {
-        ...state,
-        origins: [...action.origins],
-      };
-    case FILTER_ACTION_TYPES.CHANGE_PRICE_FILTER:
-      return {
-        ...state,
-        price: [...action.price],
+        origins: [...origins],
+        price: [...price],
       };
     default:
       return state;

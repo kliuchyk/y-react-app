@@ -3,10 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Checkbox, Slider } from 'antd';
 
 import { ORIGIN_OPTIONS } from './constants';
-// import { RootState } from '../../app/redux/rootReducer';
-// import { changeOriginFilter, changePriceFilter } from '../actions';
-// import { FiltersState } from '../reducer';
-import { requestProducts } from '../../../products/actions';
+import { setNewFilters } from '../../actions';
 
 function FilterMenu() {
   const [price, setPrice] = useState([]);
@@ -19,7 +16,7 @@ function FilterMenu() {
   }
 
   const applyFilters = () => {
-    dispatch(requestProducts({ origins, price }));
+    dispatch(setNewFilters({ origins, price }));
   };
 
   const handlePriceChange = (value: any) => {

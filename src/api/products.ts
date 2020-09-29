@@ -5,10 +5,12 @@ const { REACT_APP_API_BASE: baseURL = '' } = process.env;
 export interface RequestProductsProps {
   origins: [] | string[];
   price: [] | number[];
+  // page?: number;
+  // perPage?: number;
 }
 
-// export const getProducts = async (props: RequestProductsProps) => {
-export const getProducts = async ({ origins, price }: RequestProductsProps) => {
+export const getProducts = async (props: RequestProductsProps) => {
+  const { origins, price } = props;
   let productsApi = '/products';
 
   if (origins.length) {
