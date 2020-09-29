@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { requestProducts } from '../../products/actions';
 import { RootState } from '../../app/redux/rootReducer';
 import ProductCard from '../../components/ProductCard';
+import Pagination from '../../pagination/containers/Pagination';
 import FilterMenu from '../../filters/containers/FilterMenu';
 import { Product } from '../../products/reducer';
 import './styles.css';
@@ -45,6 +46,7 @@ function ProductsPage() {
           </Link>
         ))}
       </div>
+      <Pagination />
     </>
   );
 }

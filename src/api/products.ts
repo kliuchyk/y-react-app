@@ -24,9 +24,14 @@ export const getProducts = async ({ origins, price }: RequestProductsProps) => {
 
   const response = await fetch(`${baseURL}${productsApi}`, { mode: 'cors' });
   const data = await response.json();
-  const dataToSave = normalize(data.items);
+  const productsToSave = normalize(data.items);
 
-  return dataToSave;
+  return {
+    products: productsToSave,
+    page: data.page,
+    perPage: data.perPage,
+    totalItems: data.totalItems,
+  };
 };
 
 export const getProductById = async (id: string) => {

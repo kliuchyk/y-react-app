@@ -5,13 +5,17 @@ import { getProducts } from '../../api/products';
 import { setError, setProducts } from '../actions';
 import { RequestProductsProps } from '../../api/products';
 import { initialFiltersState } from '../../filters/reducer';
+import { setTotalItems } from '../../pagination/actions';
 
 type RequestParams = { payload: RequestProductsProps; type: string };
 
 function* productsSagaWorker({ payload = initialFiltersState }: RequestParams) {
   try {
-    const products = yield call(getProducts, payload);
+    const responseResult = yield call(getProducts, payload);
+    const { products, totalItems } = responseResult;
+    
     yield put(setProducts(products));
+    yield put(setTotalItems(totalItems));
   } catch (error) {
     yield put(setError(error.toString()));
   }
