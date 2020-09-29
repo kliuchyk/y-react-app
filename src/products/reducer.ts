@@ -30,11 +30,6 @@ export interface DetailsState {
   product: Product;
 }
 
-export interface RootState {
-  products: ProductsState;
-  details: DetailsState;
-}
-
 const initialProductsState = {
   loading: false,
   byId: {},
@@ -62,10 +57,9 @@ export function productsReducer(state = initialProductsState, action: any) {
       return {
         ...state,
         byId: {
-          ...state.byId,
           ...byId,
         },
-        allIds: [...state.allIds, ...allIds],
+        allIds: [...allIds],
         loading: false,
       };
     case PRODUCT_ACTION_TYPES.GET_PRODUCTS_FAILURE:

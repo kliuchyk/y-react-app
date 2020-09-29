@@ -1,7 +1,9 @@
 import { PRODUCT_ACTION_TYPES } from './actionTypes';
+import { RequestProductsProps } from '../api/products'
 
-export const requestProducts = () => ({
+export const requestProducts = (payload?: RequestProductsProps) => ({
   type: PRODUCT_ACTION_TYPES.GET_PRODUCTS_REQUEST,
+  payload,
 });
 
 export const setProducts = (products: any) => ({

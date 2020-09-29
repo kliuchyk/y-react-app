@@ -16,12 +16,12 @@ const { Meta } = Card;
 export default function ProductCard(props: ProductCardProps) {
   const {
     id,
-    isEditable,
     name,
     price,
     origin,
-    createdAt,
-    updatedAt,
+    // isEditable,
+    // createdAt,
+    // updatedAt,
     hoverable = false,
   } = props;
   const dispatch = useDispatch();

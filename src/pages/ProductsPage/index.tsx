@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { requestProducts } from '../../products/actions';
 import { RootState } from '../../app/redux/rootReducer';
 import ProductCard from '../../components/ProductCard';
+import FilterMenu from '../../filters/containers/FilterMenu';
 import { Product } from '../../products/reducer';
 import './styles.css';
 
@@ -25,6 +26,9 @@ function ProductsPage() {
   return (
     <>
       <h1 className="page-title">PRODUCTS</h1>
+      <div className="filters">
+        <FilterMenu />
+      </div>
       <div className="container">
         {productsCopy.map((product) => (
           <Link to={`products/${product.id}`} key={product.id}>
