@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Card } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
-import { incrementProduct } from '../../cart/actions';
+import { addProduct } from '../../cart/actions';
 import { Product } from '../../products/reducer';
 import './styles.css';
 
@@ -28,7 +28,7 @@ export default function ProductCard(props: ProductCardProps) {
 
   const handleClick = (e: MouseEvent): void => {
     e.preventDefault();
-    dispatch(incrementProduct(id));
+    dispatch(addProduct({ productId: id, name, price, origin, count: 1 }));
   };
 
   return (

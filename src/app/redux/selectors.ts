@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import { CartState } from '../../cart/reducer';
-import { Products } from '../../products/reducer';
 
 import { RootState } from './rootReducer';
 
@@ -13,29 +12,27 @@ export const selectProductItems = createSelector(
   (state) => state.byId
 );
 
-export const selectCartTotalPrice = createSelector(
-  selectProductItems,
-  selectCartItems,
-  (products: Products, selectedItems: CartState) =>
-    Object.keys(selectedItems).reduce((prev: number, curr: string) => {
-      return products[curr].price * selectedItems[curr] + prev;
-    }, 0)
+export const selectCartTotalPrice = createSelector(selectCartItems, (cartProducts) =>
+  Object.keys(cartProducts).reduce((prev: number, curr: string) => {
+    return cartProducts[curr].price * cartProducts[curr].count + prev;
+  }, 0)
 );
 
 export const selectPickedProductsCount = createSelector(
   selectCartItems,
-  (productItems: CartState) =>
-    Object.values(productItems).reduce((acc: number, curr: number) => acc + curr, 0)
+  (cartProducts: CartState) =>
+    Object.keys(cartProducts).reduce((prev: number, curr: string) => {
+      return prev + cartProducts[curr].count;
+    }, 0)
 );
 
 export const selectPickedProductsList = createSelector(
-  selectProductItems,
   selectCartItems,
-  (allProducts: Products, selectedItems: CartState) =>
-    Object.keys(selectedItems).map((id: string) => {
-      const product = { ...allProducts[id] };
-      product.amount = selectedItems[id];
-      product.totalPrice = allProducts[id].price * selectedItems[id];
-      return product;
+  (selectedItems: CartState) =>
+    Object.keys(selectedItems).map((id) => {
+      return {
+        ...selectedItems[id],
+        totalPrice: selectedItems[id].price * selectedItems[id].count,
+      };
     })
 );

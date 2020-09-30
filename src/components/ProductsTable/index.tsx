@@ -6,17 +6,19 @@ import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import {
   selectPickedProductsCount,
   selectCartTotalPrice,
+  selectPickedProductsList,
 } from '../../app/redux/selectors';
-import { Product } from '../../products/reducer';
 import {
   deleteFromCart,
   decrementProduct,
   incrementProduct,
   changeProductCount,
 } from '../../cart/actions';
-import './styles.css'
+import './styles.css';
+import { CartProduct } from '../../cart/reducer';
 
 export default function ProductsTable(props: any) {
+  const cartProducts = useSelector(selectPickedProductsList);
   const productsCount = useSelector(selectPickedProductsCount);
   const totalPrice = useSelector(selectCartTotalPrice);
   const dispatch = useDispatch();
@@ -38,23 +40,25 @@ export default function ProductsTable(props: any) {
       key: 'price',
     },
     {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
-      render: (text: string, record: Product) => (
+      title: 'Count',
+      dataIndex: 'count',
+      key: 'count',
+      render: (text: string, record: CartProduct) => (
         <Space size="middle">
           <MinusCircleOutlined
-            onClick={() => dispatch(decrementProduct(record.id))}
+            onClick={() => dispatch(decrementProduct(record.productId))}
           />
           <Input
-            className='count-input'
-            value={record.amount}
+            className="count-input"
+            value={record.count}
             onChange={(e) =>
-              dispatch(changeProductCount(parseInt(e.target.value), record.id))
+              dispatch(
+                changeProductCount(parseInt(e.target.value), record.productId)
+              )
             }
           />
           <PlusCircleOutlined
-            onClick={() => dispatch(incrementProduct(record.id))}
+            onClick={() => dispatch(incrementProduct(record.productId))}
           />
         </Space>
       ),
@@ -68,9 +72,9 @@ export default function ProductsTable(props: any) {
       title: 'Remove from cart',
       dataIndex: 'delete',
       key: 'delete',
-      render: (text: string, record: Product) => (
+      render: (text: string, record: CartProduct) => (
         <Space size="middle">
-          <Button danger onClick={() => dispatch(deleteFromCart(record.id))}>
+          <Button danger onClick={() => dispatch(deleteFromCart(record.productId))}>
             Delete
           </Button>
         </Space>
@@ -88,7 +92,7 @@ export default function ProductsTable(props: any) {
   return (
     <Table
       columns={columns}
-      dataSource={props.products}
+      dataSource={cartProducts}
       footer={() => (
         <TableFooter totalPrice={totalPrice} totalCount={productsCount} />
       )}
