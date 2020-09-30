@@ -10,10 +10,9 @@ export interface RequestProductsProps {
 }
 
 export const getProducts = async (props: RequestProductsProps) => {
-  const { origins, price, page, perPage = 20 } = props;
+  const { origins, price, page, perPage = 10 } = props;
+  console.log('PAGE:', page)
   let productsApi = `/products?perPage=${perPage}`;
-
-  console.log('FROM API', origins)
 
   if (origins.length) {
     productsApi += `&origins=${origins.toString()}`;

@@ -37,12 +37,11 @@ export const cartReducer = (state = initialState, action: CartAction) => {
       };
 
     case CART_ACTION_TYPES.INCREMENT_PRODUCT:
-      console.log('ACTION', action)
       return {
         ...state,
         [action.productId]: {
           ...state[action.productId],
-          count: state[action.productId].count + 1
+          count: state[action.productId].count + 1,
         },
       };
     case CART_ACTION_TYPES.DECREMENT_PRODUCT:
@@ -51,7 +50,7 @@ export const cartReducer = (state = initialState, action: CartAction) => {
         ...state,
         [product]: {
           ...state[product],
-          count: state[product].count > 1 ? state[product].count - 1 : 1
+          count: state[product].count > 1 ? state[product].count - 1 : 1,
         },
       };
     case CART_ACTION_TYPES.DELETE_FROM_CART:
@@ -65,7 +64,7 @@ export const cartReducer = (state = initialState, action: CartAction) => {
         [action.productId]: {
           ...state[action.productId],
           count: action.count,
-        }
+        },
       };
     default:
       return state;

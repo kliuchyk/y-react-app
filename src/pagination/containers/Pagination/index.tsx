@@ -2,18 +2,28 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from 'antd';
 
-import { selectTotalItems, selectPageSize, selectCurrentPage } from '../../selectors';
-import { setCurrentPage } from '../../actions';
+import {
+  selectTotalItems,
+  selectPageSize,
+  selectCurrentPage,
+} from '../../selectors';
+import { setCurrentPage, setPageSize } from '../../actions';
 
 export default function PaginationContainer() {
   const totalItems = useSelector(selectTotalItems);
   const pageSize = useSelector(selectPageSize);
   const currentPage = useSelector(selectCurrentPage);
-  
+
   const dispatch = useDispatch();
 
   const handlePageChange = (page: number) => {
+    if (page === currentPage) return;
     dispatch(setCurrentPage(page));
+  };
+
+  const handlePageSizeChange = (current: number, size: number) => {
+    if (pageSize === size) return;
+    dispatch(setPageSize(size));
   };
 
   return (
@@ -22,8 +32,10 @@ export default function PaginationContainer() {
         defaultCurrent={1}
         current={currentPage}
         total={totalItems}
-        defaultPageSize={pageSize}
+        pageSize={pageSize}
         onChange={handlePageChange}
+        pageSizeOptions={['10', '25', '50']}
+        onShowSizeChange={handlePageSizeChange}
       />
     </div>
   );

@@ -4,15 +4,15 @@ import { RootState } from '../app/redux/rootReducer';
 import { PAGINATION_ACTION_TYPES } from './actionTypes';
 import { RequestProductsProps, getProducts } from '../api/products';
 import { setError, setProducts } from '../products/actions';
-import { setTotalItems } from './actions';
+import { setCurrentPage, setTotalItems } from './actions';
 
-type Params = { page: number; type: string };
+type CurrentPageParams = { page: number; type: string };
 
 const getOrigins = (state: RootState) => state.filters.origins;
 const getPrice = (state: RootState) => state.filters.price;
 const getPageSize = (state: RootState) => state.pagination.perPage;
 
-function* paginationSagaWorker({ page }: Params) {
+function* paginationSagaWorker({ page }: CurrentPageParams) {
   const price = yield select(getPrice);
   const origins = yield select(getOrigins);
   const perPage = yield select(getPageSize);
@@ -27,14 +27,19 @@ function* paginationSagaWorker({ page }: Params) {
   try {
     const response = yield call(getProducts, reqParams);
     const { products, totalItems } = response;
-  
+
     yield put(setProducts(products));
     yield put(setTotalItems(totalItems));
   } catch (error) {
-    setError(error)
+    setError(error);
   }
+}
+
+function* changePageSizeWorker() {
+  yield put(setCurrentPage(1));
 }
 
 export default function* paginationSagaWatcher() {
   yield takeEvery(PAGINATION_ACTION_TYPES.SET_CURRENT_PAGE, paginationSagaWorker);
+  yield takeEvery(PAGINATION_ACTION_TYPES.SET_PAGE_SIZE, changePageSizeWorker);
 }

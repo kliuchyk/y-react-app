@@ -8,7 +8,7 @@ export interface PaginationState {
 
 export const paginationInitialState: PaginationState = {
   page: 1,
-  perPage: 20,
+  perPage: 10,
   totalItems: 0,
 };
 
@@ -33,6 +33,11 @@ export const paginationReducer = (
       return {
         ...state,
         page: action.page,
+      };
+    case PAGINATION_ACTION_TYPES.SET_PAGE_SIZE:
+      return {
+        ...state,
+        perPage: action.perPage,
       };
     default:
       return state;

@@ -9,3 +9,8 @@ export const setTotalItems = (totalItems: number) => ({
   type: PAGINATION_ACTION_TYPES.SET_TOTAL_ITEMS,
   totalItems,
 });
+
+export const setPageSize = (perPage: number) => ({
+  type: PAGINATION_ACTION_TYPES.SET_PAGE_SIZE,
+  perPage,
+})
