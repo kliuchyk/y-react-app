@@ -12,21 +12,29 @@ export const paginationInitialState: PaginationState = {
   totalItems: 0,
 };
 
-export interface CartAction {
+export interface PaginationAction {
   type: string;
-  productId: string;
-  count?: number;
+  totalItems?: number;
+  page?: number;
+  perPage?: number;
 }
 
-export const paginationReducer = (state = paginationInitialState, action: any) => {
-  switch(action.type) {
+export const paginationReducer = (
+  state = paginationInitialState,
+  action: PaginationAction
+) => {
+  switch (action.type) {
     case PAGINATION_ACTION_TYPES.SET_TOTAL_ITEMS:
       return {
         ...state,
-        totalItems: action.totalItems
-      }
+        totalItems: action.totalItems,
+      };
+    case PAGINATION_ACTION_TYPES.SET_CURRENT_PAGE:
+      return {
+        ...state,
+        page: action.page,
+      };
     default:
       return state;
   }
-  
 };

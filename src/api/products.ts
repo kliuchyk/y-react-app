@@ -5,23 +5,27 @@ const { REACT_APP_API_BASE: baseURL = '' } = process.env;
 export interface RequestProductsProps {
   origins: [] | string[];
   price: [] | number[];
-  // page?: number;
-  // perPage?: number;
+  page?: number;
+  perPage?: number;
 }
 
 export const getProducts = async (props: RequestProductsProps) => {
-  const { origins, price } = props;
-  let productsApi = '/products';
+  const { origins, price, page, perPage = 20 } = props;
+  let productsApi = `/products?perPage=${perPage}`;
+
+  console.log('FROM API', origins)
 
   if (origins.length) {
-    productsApi += `?origins=${origins.toString()}`;
+    productsApi += `&origins=${origins.toString()}`;
   }
 
   if (price.length) {
     const [minPrice, maxPrice] = price;
-    const queryChar = origins.length ? '&' : '?';
+    productsApi += `&minPrice=${minPrice}&maxPrice=${maxPrice}`;
+  }
 
-    productsApi += `${queryChar}minPrice=${minPrice}&maxPrice=${maxPrice}`;
+  if (page && page !== 1) {
+    productsApi += `&page=${page}`;
   }
 
   const response = await fetch(`${baseURL}${productsApi}`, { mode: 'cors' });

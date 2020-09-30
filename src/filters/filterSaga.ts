@@ -1,25 +1,10 @@
-import { put, takeEvery, call } from 'redux-saga/effects';
-import { getProducts } from '../api/products';
+import { put, takeEvery } from 'redux-saga/effects';
 
-import { FiltersState } from './reducer';
 import { FILTER_ACTION_TYPES } from './actionTypes';
-import { setProducts } from '../products/actions';
-import { setError } from '../products/actions';
+import { setCurrentPage } from '../pagination/actions';
 
-type FilterSagaParams = { filters: FiltersState; type: string };
-
-function* filterSagaWorker({ filters }: FilterSagaParams) {
-  console.log('FILTERS CHANGES with SAGA!', filters);
-
-  try {
-    // 1. call all_products API again for the first page, but with new filters
-    const response = yield call(getProducts, filters);
-
-    // 2. set new products to the state
-    yield put(setProducts(response.products));
-  } catch (error) {
-    yield put(setError(error.toString()));
-  }
+function* filterSagaWorker() {
+  yield put(setCurrentPage(1));
 }
 
 export default function* filterSagaWatcher() {
