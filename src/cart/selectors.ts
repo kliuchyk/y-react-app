@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
-import { CartState } from '../../cart/reducer';
+import { CartState } from './reducer';
 
-import { RootState } from './rootReducer';
+import { RootState } from '../app/redux/rootReducer';
+import { selectProducts } from '../products/selectors'
 
-export const selectProducts = (state: RootState) => state.products;
 export const selectDetails = (state: RootState) => state.details;
 export const selectCartItems = (state: RootState) => state.cartItems;
 

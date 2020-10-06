@@ -7,7 +7,7 @@ import {
   selectPickedProductsCount,
   selectCartTotalPrice,
   selectPickedProductsList,
-} from '../../app/redux/selectors';
+} from '../../cart/selectors';
 import {
   deleteFromCart,
   decrementProduct,

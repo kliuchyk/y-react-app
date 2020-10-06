@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { requestProducts } from '../../products/actions';
-import { RootState } from '../../app/redux/rootReducer';
 import ProductCard from '../../components/ProductCard';
 import Pagination from '../../pagination/containers/Pagination';
 import FilterMenu from '../../filters/containers/FilterMenu';
 import { Product } from '../../products/reducer';
+import { selectProducts } from '../../products/selectors';
 import './styles.css';
 
-const selectProducts = (state: RootState) => state.products;
 
 function ProductsPage() {
   const dispatch = useDispatch();

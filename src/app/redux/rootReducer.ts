@@ -1,3 +1,4 @@
+import { modalsReducer, ModalsState } from './../../modals/reducer';
 import { combineReducers } from 'redux';
 
 import {
@@ -9,6 +10,7 @@ import {
 import { cartReducer, CartState } from '../../cart/reducer';
 import { filterReducer, FiltersState } from '../../filters/reducer';
 import { paginationReducer, PaginationState } from '../../pagination/reducer';
+import { originReducer, OriginsState } from '../../origins/reducer';
 
 export interface RootState {
   products: ProductsState;
@@ -16,6 +18,8 @@ export interface RootState {
   cartItems: CartState;
   filters: FiltersState;
   pagination: PaginationState;
+  modals: ModalsState;
+  origins: OriginsState;
 }
 
 const rootReducer = combineReducers({
@@ -24,6 +28,8 @@ const rootReducer = combineReducers({
   cartItems: cartReducer,
   filters: filterReducer,
   pagination: paginationReducer,
+  modals: modalsReducer,
+  origins: originReducer,
 });
 
 export default rootReducer;

@@ -1,14 +1,13 @@
 import { ORIGINS_ACTIONS } from './actionTypes';
 
-export type Origin = string;
-
-export interface OriginsState {
-  origins: [] | Origin[];
+export interface Origin {
+  value: string;
+  displayName: string;
 }
 
-const initialState: OriginsState = {
-  origins: [],
-};
+export type OriginsState = [] | Origin[];
+
+const initialState: OriginsState = [];
 
 interface Action {
   type: string;
@@ -18,12 +17,8 @@ interface Action {
 export const originReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case ORIGINS_ACTIONS.GET_ORIGINS_SUCCESS:
-      return {
-        ...state,
-        origins: [action.origins],
-      };
+      return action.origins;
     default:
       return state;
   }
 };
-  

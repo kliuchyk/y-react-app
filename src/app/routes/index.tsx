@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import Loader from '../../components/Loader';
 import Header from '../../components/Header';
 import ProductsPage from '../../pages/ProductsPage';
 import ProductDetailsPage from '../../pages/ProductDetailsPage';
 import ShoppingCartPage from '../../pages/ShoppingCartPage';
+import Modal from '../../modals/containers/Modal';
 import RoutePaths from './paths';
+import { selectAddNewProductModal } from '../../modals/selectors';
+import { toggleAddNewProductModal } from '../../modals/actions';
+import { CreateProduct } from '../../containers/CreateProduct';
+import { useGetProductsOrigin } from '../../hooks/useGetProductsOrigin';
 
 export default function AppRoutes() {
+  const isOpen = useSelector(selectAddNewProductModal);
+  const dispatch = useDispatch();
+  const { getProductsOrigins } = useGetProductsOrigin();
+
+  const closeModal = () => {
+    dispatch(toggleAddNewProductModal(false));
+  };
+
+  useEffect(() => {
+    getProductsOrigins();
+  });
+
   return (
     <div>
       <Header />
@@ -17,10 +34,20 @@ export default function AppRoutes() {
         <Switch>
           <Route path={RoutePaths.Products._()} exact component={ProductsPage} />
           <Route path={RoutePaths.Cart._()} component={ShoppingCartPage} />
-          <Route path={RoutePaths.Products.ById._()} exact component={ProductDetailsPage} />
+          <Route
+            path={RoutePaths.Products.ById._()}
+            exact
+            component={ProductDetailsPage}
+          />
           <Redirect path="*" to={RoutePaths.Products._()} />
         </Switch>
       </main>
+
+      {isOpen && (
+        <Modal title="Add new product" onClose={closeModal}>
+          <CreateProduct />
+        </Modal>
+      )}
     </div>
   );
 }

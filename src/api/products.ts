@@ -1,17 +1,17 @@
+import { NewProduct } from '../products/reducer';
 import { normalize } from '../utils/normalize';
 
-const { REACT_APP_API_BASE: baseURL = '' } = process.env;
+const { REACT_APP_API_BASE: baseURL = '', REACT_APP_API_KEY: apiKey } = process.env;
 
 export interface RequestProductsProps {
-  origins: [] | string[];
-  price: [] | number[];
+  origins?: [] | string[];
+  price?: [] | number[];
   page?: number;
   perPage?: number;
 }
 
 export const getProducts = async (props: RequestProductsProps) => {
-  const { origins, price, page, perPage = 10 } = props;
-  console.log('PAGE:', page)
+  const { origins = [], price = [], page, perPage = 10 } = props;
   let productsApi = `/products?perPage=${perPage}`;
 
   if (origins.length) {
@@ -44,4 +44,17 @@ export const getProductById = async (id: string) => {
   const data = await response.json();
 
   return data;
+};
+
+export const createNewProduct = async ({ name, price, origin }: NewProduct) => {
+  const response = await fetch(`${baseURL}/products`, {
+    method: 'POST',
+    headers: {
+      Authorization: `${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ product: { name, price, origin } }),
+  });
+
+  return await response.json();
 };

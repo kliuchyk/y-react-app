@@ -1,5 +1,6 @@
 import { PRODUCT_ACTION_TYPES } from './actionTypes';
-import { RequestProductsProps } from '../api/products'
+import { RequestProductsProps } from '../api/products';
+import { NewProduct } from './reducer';
 
 export const requestProducts = (payload?: RequestProductsProps) => ({
   type: PRODUCT_ACTION_TYPES.GET_PRODUCTS_REQUEST,
@@ -29,4 +30,18 @@ export const detailsFetchSuccess = (payload: string) => ({
 export const detailsFetchError = (payload: string) => ({
   type: PRODUCT_ACTION_TYPES.DETAILS_FETCH_ERROR,
   payload,
+});
+
+export const createProductRequest = (product: NewProduct) => ({
+  type: PRODUCT_ACTION_TYPES.CREATE_PRODUCT_REQUEST,
+  product,
+});
+
+export const createProductSuccess = (product: NewProduct) => ({
+  type: PRODUCT_ACTION_TYPES.CREATE_PRODUCT_SUCCESS,
+});
+
+export const createProductError = (error: string) => ({
+  type: PRODUCT_ACTION_TYPES.CREATE_PRODUCT_FAILURE,
+  error,
 });

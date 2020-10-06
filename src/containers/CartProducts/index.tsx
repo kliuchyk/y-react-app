@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectPickedProductsList } from '../../app/redux/selectors';
+import { selectPickedProductsList } from '../../cart/selectors';
 import ProductsTable from '../../components/ProductsTable';
 
 const CartProducts = () => {

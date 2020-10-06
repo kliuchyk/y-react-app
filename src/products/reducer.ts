@@ -12,6 +12,12 @@ export interface Product {
   totalPrice?: number;
 }
 
+export interface NewProduct {
+  name: string;
+  price: number;
+  origin: string;
+}
+
 export interface Products {
   [key: string]: Product;
 }
@@ -47,6 +53,7 @@ const initialDetailsState = {
 export function productsReducer(state = initialProductsState, action: any) {
   switch (action.type) {
     case PRODUCT_ACTION_TYPES.GET_PRODUCTS_REQUEST:
+    case PRODUCT_ACTION_TYPES.CREATE_PRODUCT_REQUEST:
       return {
         ...state,
         error: null,
