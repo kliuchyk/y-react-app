@@ -1,0 +1,26 @@
+.modal-body {
+  background: #fff;
+  border-radius: 3px;
+  height: fit-content;
+  margin-top: 25%;
+}
+
+.modal-header {
+  border-bottom: 1px solid #ccc;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28px;
+}
+
+.modal-close-btn {
+  font-size: 32px;
+  font-weight: bold;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+
+.modal-content {
+  margin-top: 30px;
+}
