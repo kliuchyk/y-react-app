@@ -9,7 +9,11 @@ import {
 } from '../../selectors';
 import { setCurrentPage, setPageSize } from '../../actions';
 
-export default function PaginationContainer() {
+interface FilterProps {
+  isEditable?: boolean;
+}
+
+export default function PaginationContainer({ isEditable = false }: FilterProps) {
   const totalItems = useSelector(selectTotalItems);
   const pageSize = useSelector(selectPageSize);
   const currentPage = useSelector(selectCurrentPage);
@@ -18,7 +22,7 @@ export default function PaginationContainer() {
 
   const handlePageChange = (page: number) => {
     if (page === currentPage) return;
-    dispatch(setCurrentPage(page));
+    dispatch(setCurrentPage(page, isEditable));
   };
 
   const handlePageSizeChange = (current: number, size: number) => {

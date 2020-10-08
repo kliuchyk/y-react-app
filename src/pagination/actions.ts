@@ -1,8 +1,9 @@
 import { PAGINATION_ACTION_TYPES } from './actionTypes';
 
-export const setCurrentPage = (page: number) => ({
+export const setCurrentPage = (page: number, isEditable: boolean) => ({
   type: PAGINATION_ACTION_TYPES.SET_CURRENT_PAGE,
   page,
+  isEditable
 });
 
 export const setTotalItems = (totalItems: number) => ({

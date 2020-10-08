@@ -5,7 +5,11 @@ import { Checkbox, Slider } from 'antd';
 import { ORIGIN_OPTIONS } from './constants';
 import { setNewFilters } from '../../actions';
 
-function FilterMenu() {
+interface FilterProps {
+  isEditable?: boolean;
+};
+
+function FilterMenu({ isEditable = false }: FilterProps ) {
   const [price, setPrice] = useState([]);
   const [origins, setOrigins] = useState([]);
 
@@ -16,7 +20,7 @@ function FilterMenu() {
   }
 
   const applyFilters = () => {
-    dispatch(setNewFilters({ origins, price }));
+    dispatch(setNewFilters({ origins, price }, isEditable));
   };
 
   const handlePriceChange = (value: any) => {

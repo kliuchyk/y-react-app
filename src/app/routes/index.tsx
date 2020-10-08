@@ -25,7 +25,7 @@ export default function AppRoutes() {
 
   useEffect(() => {
     getProductsOrigins();
-  });
+  }, [getProductsOrigins]);
 
   return (
     <div>

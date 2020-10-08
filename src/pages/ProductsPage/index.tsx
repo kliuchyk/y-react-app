@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { requestProducts } from '../../products/actions';
+import { setCurrentPage } from '../../pagination/actions';
 import ProductCard from '../../components/ProductCard';
 import Pagination from '../../pagination/containers/Pagination';
 import FilterMenu from '../../filters/containers/FilterMenu';
@@ -10,14 +10,13 @@ import { Product } from '../../products/reducer';
 import { selectProductItems } from '../../products/selectors';
 import './styles.css';
 
-
 function ProductsPage() {
   const dispatch = useDispatch();
   const products = useSelector(selectProductItems);
 
   useEffect(() => {
-    dispatch(requestProducts());
-  }, [dispatch, products]);
+    dispatch(setCurrentPage(1, false));
+  }, [dispatch]);
 
   const productsCopy: Product[] = [...(Object.values(products) as Product[])];
 

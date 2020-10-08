@@ -6,13 +6,13 @@ import { RequestProductsProps, getProducts } from '../api/products';
 import { setError, setProducts } from '../products/actions';
 import { setCurrentPage, setTotalItems } from './actions';
 
-type CurrentPageParams = { page: number; type: string };
+type CurrentPageParams = { page: number; type: string; isEditable: boolean };
 
 const getOrigins = (state: RootState) => state.filters.origins;
 const getPrice = (state: RootState) => state.filters.price;
 const getPageSize = (state: RootState) => state.pagination.perPage;
 
-function* paginationSagaWorker({ page }: CurrentPageParams) {
+function* paginationSagaWorker({ page, isEditable }: CurrentPageParams) {
   const price = yield select(getPrice);
   const origins = yield select(getOrigins);
   const perPage = yield select(getPageSize);
@@ -22,6 +22,7 @@ function* paginationSagaWorker({ page }: CurrentPageParams) {
     price,
     page,
     perPage,
+    isEditable
   };
 
   try {
@@ -35,8 +36,8 @@ function* paginationSagaWorker({ page }: CurrentPageParams) {
   }
 }
 
-function* changePageSizeWorker() {
-  yield put(setCurrentPage(1));
+function* changePageSizeWorker({ isEditable }: CurrentPageParams) {
+  yield put(setCurrentPage(1, isEditable));
 }
 
 export default function* paginationSagaWatcher() {
