@@ -7,21 +7,19 @@ import ProductCard from '../../components/ProductCard';
 import Pagination from '../../pagination/containers/Pagination';
 import FilterMenu from '../../filters/containers/FilterMenu';
 import { Product } from '../../products/reducer';
-import { selectProducts } from '../../products/selectors';
+import { selectProductItems } from '../../products/selectors';
 import './styles.css';
 
 
 function ProductsPage() {
   const dispatch = useDispatch();
-  const products = useSelector(selectProducts);
+  const products = useSelector(selectProductItems);
 
   useEffect(() => {
-    if (!products.allIds.length) {
-      dispatch(requestProducts());
-    }
-  }, [dispatch, products.allIds.length]);
+    dispatch(requestProducts());
+  }, [dispatch, products]);
 
-  const productsCopy: Product[] = [...(Object.values(products.byId) as Product[])];
+  const productsCopy: Product[] = [...(Object.values(products) as Product[])];
 
   return (
     <>

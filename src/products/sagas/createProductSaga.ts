@@ -1,5 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { createNewProduct, getProducts } from '../../api/products';
+import { createNewProduct } from '../../api/products';
 import { PRODUCT_ACTION_TYPES } from '../actionTypes';
 import { createProductError, requestProducts } from '../actions';
 import { NewProduct } from '../reducer';

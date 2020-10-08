@@ -9,3 +9,8 @@ export const selectLoading = createSelector(
   selectProducts,
   (state: ProductsState) => state.loading
 );
+
+export const selectProductItems = createSelector(
+  selectProducts,
+  (products: ProductsState) => products.byId
+);

@@ -8,11 +8,21 @@ export interface RequestProductsProps {
   price?: [] | number[];
   page?: number;
   perPage?: number;
+  isEditable?: boolean;
+}
+
+const headers = {
+  Authorization: `${apiKey}`,
+  'Content-Type': 'application/json',
 }
 
 export const getProducts = async (props: RequestProductsProps) => {
-  const { origins = [], price = [], page, perPage = 10 } = props;
+  const { origins = [], price = [], page, perPage = 10, isEditable = false } = props;
   let productsApi = `/products?perPage=${perPage}`;
+
+  if (isEditable) {
+    productsApi += `&editable=true`
+  }
 
   if (origins.length) {
     productsApi += `&origins=${origins.toString()}`;
@@ -27,7 +37,7 @@ export const getProducts = async (props: RequestProductsProps) => {
     productsApi += `&page=${page}`;
   }
 
-  const response = await fetch(`${baseURL}${productsApi}`, { mode: 'cors' });
+  const response = await fetch(`${baseURL}${productsApi}`, { mode: 'cors', headers });
   const data = await response.json();
   const productsToSave = normalize(data.items);
 
@@ -47,12 +57,10 @@ export const getProductById = async (id: string) => {
 };
 
 export const createNewProduct = async ({ name, price, origin }: NewProduct) => {
+  console.log('apiKey', apiKey)
   const response = await fetch(`${baseURL}/products`, {
     method: 'POST',
-    headers: {
-      Authorization: `${apiKey}`,
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({ product: { name, price, origin } }),
   });
 

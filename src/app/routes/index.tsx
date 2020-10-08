@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../components/Header';
 import ProductsPage from '../../pages/ProductsPage';
+import MyProductsPage from '../../pages/MyProducts';
 import ProductDetailsPage from '../../pages/ProductDetailsPage';
 import ShoppingCartPage from '../../pages/ShoppingCartPage';
 import Modal from '../../modals/containers/Modal';
@@ -33,6 +34,7 @@ export default function AppRoutes() {
       <main>
         <Switch>
           <Route path={RoutePaths.Products._()} exact component={ProductsPage} />
+          <Route path={RoutePaths.MyProducts._()} exact component={MyProductsPage} />
           <Route path={RoutePaths.Cart._()} component={ShoppingCartPage} />
           <Route
             path={RoutePaths.Products.ById._()}

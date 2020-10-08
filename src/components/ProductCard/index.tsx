@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
 import { addProduct } from '../../cart/actions';
@@ -19,7 +19,7 @@ export default function ProductCard(props: ProductCardProps) {
     name,
     price,
     origin,
-    // isEditable,
+    isEditable,
     // createdAt,
     // updatedAt,
     hoverable = false,
@@ -31,15 +31,29 @@ export default function ProductCard(props: ProductCardProps) {
     dispatch(addProduct({ productId: id, name, price, origin, count: 1 }));
   };
 
+  const handleEdit = () => {
+    console.log('EDIT');
+  };
+
+  const editProduct = (
+    <Button type="primary" onClick={handleEdit}>
+      Edit product
+    </Button>
+  );
+
+  const addProductToCard = (
+    <span className="add-to-cart" onClick={handleClick}>
+      Add to cart <ShoppingCartOutlined key="setting" />
+    </span>
+  );
+
+  const cardAction = isEditable ? editProduct : addProductToCard;
+
   return (
     <Card
       hoverable={hoverable}
       style={{ width: 300, margin: '20px' }}
-      actions={[
-        <span className="add-to-cart" onClick={handleClick}>
-          Add to cart <ShoppingCartOutlined key="setting" />
-        </span>,
-      ]}
+      actions={[cardAction]}
     >
       <Meta title={name} description={`Origin: ${origin}`} />
       <p>Pice: {price}</p>

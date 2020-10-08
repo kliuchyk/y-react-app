@@ -12,6 +12,7 @@ import './styles.css';
 
 export default function Header() {
   const matchProducts = useRouteMatch(RoutePaths.Products._());
+  const matchMyProducts = useRouteMatch(RoutePaths.MyProducts._());
   const matchShoppingCart = useRouteMatch(RoutePaths.Cart._());
   const totalPrice = useSelector(selectCartTotalPrice);
   const dispatch = useDispatch();
@@ -22,6 +23,12 @@ export default function Header() {
       title="Products App"
       subTitle="ReactJS School"
       extra={[
+        <Link key="products" to={RoutePaths.Products._()}>
+          <Button type={matchProducts ? 'primary' : 'default'}>All Products</Button>
+        </Link>,
+        <Link key="my-products" to={RoutePaths.MyProducts._()}>
+          <Button type={matchMyProducts ? 'primary' : 'default'}>My Products</Button>
+        </Link>,
         <Button
           key="modal"
           type="default"
@@ -29,9 +36,6 @@ export default function Header() {
         >
           Add new product
         </Button>,
-        <Link key="products" to={RoutePaths.Products._()}>
-          <Button type={matchProducts ? 'primary' : 'default'}>Products</Button>
-        </Link>,
         <Link
           key="cart"
           to={RoutePaths.Cart._()}
