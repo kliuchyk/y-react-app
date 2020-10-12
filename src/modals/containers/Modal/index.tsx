@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Spin } from 'antd';
 
 import Portal from '../../../containers/Portal';
 import './styles.css';
+import { selectLoading } from '../../../products/selectors';
 
 interface ModalProps {
   title: string;
@@ -9,6 +12,8 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ title, onClose, children }) => {
+  const loading = useSelector(selectLoading);
+
   return (
     <Portal>
       <div className="modal-body">
@@ -20,6 +25,12 @@ const Modal: React.FC<ModalProps> = ({ title, onClose, children }) => {
         </div>
 
         <div className="modal-content">{children}</div>
+        {loading && (
+          <div className="modal-spin">
+            {' '}
+            <Spin size="large" />
+          </div>
+        )}
       </div>
     </Portal>
   );

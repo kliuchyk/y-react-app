@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setCurrentPage } from '../../pagination/actions';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../products/components/ProductCard';
 import Pagination from '../../pagination/containers/Pagination';
 import FilterMenu from '../../filters/containers/FilterMenu';
 import { Product } from '../../products/reducer';

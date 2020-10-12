@@ -11,7 +11,7 @@ import Modal from '../../modals/containers/Modal';
 import RoutePaths from './paths';
 import { selectAddNewProductModal } from '../../modals/selectors';
 import { toggleAddNewProductModal } from '../../modals/actions';
-import { CreateProduct } from '../../containers/CreateProduct';
+import { CreateProductForm } from '../../products/containers/CreateProductForm';
 import { useGetProductsOrigin } from '../../hooks/useGetProductsOrigin';
 
 export default function AppRoutes() {
@@ -47,7 +47,7 @@ export default function AppRoutes() {
 
       {isOpen && (
         <Modal title="Add new product" onClose={closeModal}>
-          <CreateProduct />
+          <CreateProductForm />
         </Modal>
       )}
     </div>

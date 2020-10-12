@@ -4,6 +4,7 @@
   height: fit-content;
   margin-top: 25%;
   padding: 23px 0;
+  position: relative;
 }
 
 .modal-header {
@@ -24,4 +25,11 @@
 
 .modal-content {
   margin-top: 30px;
+}
+
+.modal-spin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

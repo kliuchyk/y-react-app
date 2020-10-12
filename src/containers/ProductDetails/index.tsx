@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { detailsLoading } from '../../products/actions';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../products/components/ProductCard';
 import { RootState } from '../../app/redux/rootReducer';
 
 export interface ProductDetailsProps {

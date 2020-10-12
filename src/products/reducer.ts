@@ -18,8 +18,19 @@ export interface NewProduct {
   origin: string;
 }
 
+export interface EditProduct extends NewProduct {
+  id: string;
+}
+
 export interface Products {
   [key: string]: Product;
+}
+
+export interface SelectedProduct {
+  id: string;
+  name: string;
+  price: number;
+  origin: string;
 }
 
 export interface ProductsState {
@@ -54,6 +65,7 @@ export function productsReducer(state = initialProductsState, action: any) {
   switch (action.type) {
     case PRODUCT_ACTION_TYPES.GET_PRODUCTS_REQUEST:
     case PRODUCT_ACTION_TYPES.CREATE_PRODUCT_REQUEST:
+    case PRODUCT_ACTION_TYPES.EDIT_PRODUCTS_REQUEST:
       return {
         ...state,
         error: null,

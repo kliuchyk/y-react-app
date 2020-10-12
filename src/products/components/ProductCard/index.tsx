@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Card, Button } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
-import { addProduct } from '../../cart/actions';
-import { Product } from '../../products/reducer';
+import { addProduct } from '../../../cart/actions';
+import { startProductEdit } from '../../actions';
+import { Product } from '../../reducer';
 import './styles.css';
 
 export interface ProductCardProps extends Product {
@@ -14,25 +15,16 @@ export interface ProductCardProps extends Product {
 const { Meta } = Card;
 
 export default function ProductCard(props: ProductCardProps) {
-  const {
-    id,
-    name,
-    price,
-    origin,
-    isEditable,
-    // createdAt,
-    // updatedAt,
-    hoverable = false,
-  } = props;
+  const { id, name, price, origin, isEditable, hoverable = false } = props;
   const dispatch = useDispatch();
 
-  const handleClick = (e: MouseEvent): void => {
+  const addToCart = (e: MouseEvent): void => {
     e.preventDefault();
     dispatch(addProduct({ productId: id, name, price, origin, count: 1 }));
   };
 
   const handleEdit = () => {
-    console.log('EDIT');
+    dispatch(startProductEdit({ id, name, price, origin }));
   };
 
   const editProduct = (
@@ -42,7 +34,7 @@ export default function ProductCard(props: ProductCardProps) {
   );
 
   const addProductToCard = (
-    <span className="add-to-cart" onClick={handleClick}>
+    <span className="add-to-cart" onClick={addToCart}>
       Add to cart <ShoppingCartOutlined key="setting" />
     </span>
   );

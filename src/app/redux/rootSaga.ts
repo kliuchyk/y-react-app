@@ -5,6 +5,7 @@ import productDetails from '../../products/sagas/productDetailsSaga';
 import newProductSaga from '../../products/sagas/createProductSaga';
 import filterSaga from '../../filters/filterSaga';
 import paginationSaga from '../../pagination/paginationSaga';
+import editProductSaga from '../../products/sagas/editProductSaga'
 
 export default function* rootSaga() {
   yield all([
@@ -13,5 +14,6 @@ export default function* rootSaga() {
     filterSaga(),
     paginationSaga(),
     newProductSaga(),
+    editProductSaga(),
   ]);
 }

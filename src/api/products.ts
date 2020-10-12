@@ -1,4 +1,4 @@
-import { NewProduct } from '../products/reducer';
+import { NewProduct, EditProduct } from '../products/reducer';
 import { normalize } from '../utils/normalize';
 
 const { REACT_APP_API_BASE: baseURL = '', REACT_APP_API_KEY: apiKey } = process.env;
@@ -57,11 +57,21 @@ export const getProductById = async (id: string) => {
 };
 
 export const createNewProduct = async ({ name, price, origin }: NewProduct) => {
-  console.log('apiKey', apiKey)
   const response = await fetch(`${baseURL}/products`, {
     method: 'POST',
     headers,
     body: JSON.stringify({ product: { name, price, origin } }),
+  });
+
+  return await response.json();
+};
+
+export const editProduct = async (reqData: EditProduct) => {
+  const { id, ...product } = reqData;
+  const response = await fetch(`${baseURL}/products/${id}`, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({ product: { ...product } }),
   });
 
   return await response.json();

@@ -1,34 +1,27 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 
-import { selectOrigins } from '../../origins/selectors';
-import { Origin } from '../../origins/reducer';
-import { createProductRequest } from '../../products/actions';
-import { NewProduct } from '../../products/reducer';
-import { selectLoading } from '../../products/selectors';
+import { PRODUCT_VALIDATION_SCHEMA as validationSchema } from '../constants/ProductSchema';
+import { selectOrigins } from '../../../origins/selectors';
+import { Origin } from '../../../origins/reducer';
+import { createProductRequest } from '../../actions';
+import { NewProduct } from '../../reducer';
+import { selectLoading } from '../../selectors';
 import './styles.css';
 
-export const CreateProduct: React.FC = () => {
+export const CreateProductForm: React.FC = () => {
   const origins: Origin[] = useSelector(selectOrigins);
   const loading = useSelector(selectLoading);
   const dispatch = useDispatch();
-  
+
   const formik = useFormik({
     initialValues: {
       name: '',
       price: 0,
       origin: '',
     },
-    validationSchema: Yup.object({
-      name: Yup.string()
-        .required('Required')
-        .min(3, 'Must be 3-20 characters long')
-        .max(20, 'Must be 3-20 characters long'),
-      price: Yup.number().required('Required').positive(),
-      origin: Yup.string().required('Required'),
-    }),
+    validationSchema,
     onSubmit: (values: NewProduct) => {
       const { name, price, origin } = values;
       dispatch(createProductRequest({ name, price, origin: origin.toLowerCase() }));
@@ -94,11 +87,9 @@ export const CreateProduct: React.FC = () => {
           <div className="form-error">{formik.errors.origin}</div>
         ) : null}
       </div>
-      <button type="submit" disabled={loading}>Submit</button>
-      {/* <div className="form-actions">
-        <button>Cancel</button>
-        <button>Add</button>
-      </div> */}
+      <button type="submit" disabled={loading}>
+        Submit
+      </button>
     </form>
   );
 };
