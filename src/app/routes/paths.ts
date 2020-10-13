@@ -14,6 +14,9 @@ const RoutePaths = {
   MyProducts: {
     _: pathCreator('/my-products'),
   },
+  Orders: {
+    _: pathCreator('/orders'),
+  },
 };
 
 export default RoutePaths;

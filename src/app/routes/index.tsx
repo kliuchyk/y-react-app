@@ -7,8 +7,9 @@ import ProductsPage from '../../pages/ProductsPage';
 import MyProductsPage from '../../pages/MyProducts';
 import ProductDetailsPage from '../../pages/ProductDetailsPage';
 import ShoppingCartPage from '../../pages/ShoppingCartPage';
-import Modal from '../../modals/containers/Modal';
+import OrdersPage from '../../pages/Orders';
 import RoutePaths from './paths';
+import Modal from '../../modals/containers/Modal';
 import { selectAddNewProductModal } from '../../modals/selectors';
 import { toggleAddNewProductModal } from '../../modals/actions';
 import { CreateProductForm } from '../../products/containers/CreateProductForm';
@@ -41,6 +42,7 @@ export default function AppRoutes() {
             exact
             component={ProductDetailsPage}
           />
+          <Route path={RoutePaths.Orders._()} exact component={OrdersPage} />
           <Redirect path="*" to={RoutePaths.Products._()} />
         </Switch>
       </main>

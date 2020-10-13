@@ -12,6 +12,7 @@ import './styles.css';
 
 export default function Header() {
   const matchProducts = useRouteMatch(RoutePaths.Products._());
+  const matchOrders = useRouteMatch(RoutePaths.Orders._());
   const matchMyProducts = useRouteMatch(RoutePaths.MyProducts._());
   const matchShoppingCart = useRouteMatch(RoutePaths.Cart._());
   const totalPrice = useSelector(selectCartTotalPrice);
@@ -36,6 +37,9 @@ export default function Header() {
         >
           Add new product
         </Button>,
+        <Link key="orders" to={RoutePaths.Orders._()}>
+          <Button type={matchOrders ? 'primary' : 'default'}>Orders</Button>
+        </Link>,
         <Link
           key="cart"
           to={RoutePaths.Cart._()}

@@ -17,7 +17,7 @@ export const decrementProduct = (productId: string) => ({
 });
 
 export const deleteFromCart = (productId: string) => ({
-  type: CART_ACTION_TYPES.DELETE_FROM_CART,
+  type: CART_ACTION_TYPES.DELETE_PRODUCT_FROM_CART,
   productId,
 });
 
@@ -25,4 +25,8 @@ export const changeProductCount = (count: number, productId: string) => ({
   type: CART_ACTION_TYPES.CHANGE_PRODUCT_COUNT,
   count,
   productId,
+});
+
+export const emptyCart = () => ({
+  type: CART_ACTION_TYPES.EMPTY_CART,
 });

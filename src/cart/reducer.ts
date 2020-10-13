@@ -53,7 +53,7 @@ export const cartReducer = (state = initialState, action: CartAction) => {
           count: state[product].count > 1 ? state[product].count - 1 : 1,
         },
       };
-    case CART_ACTION_TYPES.DELETE_FROM_CART:
+    case CART_ACTION_TYPES.DELETE_PRODUCT_FROM_CART:
       const { [action.productId]: productToDelete, ...rest } = state;
       return {
         ...rest,
@@ -66,6 +66,8 @@ export const cartReducer = (state = initialState, action: CartAction) => {
           count: action.count,
         },
       };
+    case CART_ACTION_TYPES.EMPTY_CART:
+      return initialState;
     default:
       return state;
   }

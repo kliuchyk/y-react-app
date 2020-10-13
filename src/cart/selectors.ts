@@ -36,3 +36,14 @@ export const selectPickedProductsList = createSelector(
       };
     })
 );
+
+export const selectProductsForOrder = createSelector(
+  selectCartItems,
+  (selectedItems: CartState) =>
+    Object.values(selectedItems).map((item) => {
+      return {
+        productId: item.productId,
+        count: item.count,
+      };
+    })
+);
