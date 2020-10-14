@@ -8,6 +8,7 @@ import paginationSaga from '../../pagination/paginationSaga';
 import editProductSaga from '../../products/sagas/editProductSaga';
 import ordersListSaga from '../../orders/sagas/ordersListSaga';
 import newOrderSaga from '../../orders/sagas/newOrderSaga';
+import orderDetailsSaga from '../../orders/sagas/orderDetailsSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -19,5 +20,6 @@ export default function* rootSaga() {
     editProductSaga(),
     ordersListSaga(),
     newOrderSaga(),
+    orderDetailsSaga(),
   ]);
 }

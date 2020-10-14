@@ -8,6 +8,7 @@ import MyProductsPage from '../../pages/MyProducts';
 import ProductDetailsPage from '../../pages/ProductDetailsPage';
 import ShoppingCartPage from '../../pages/ShoppingCartPage';
 import OrdersPage from '../../pages/Orders';
+import OrderDetailsPage from '../../pages/OrderDetailsPage';
 import RoutePaths from './paths';
 import Modal from '../../modals/containers/Modal';
 import { selectAddNewProductModal } from '../../modals/selectors';
@@ -43,6 +44,11 @@ export default function AppRoutes() {
             component={ProductDetailsPage}
           />
           <Route path={RoutePaths.Orders._()} exact component={OrdersPage} />
+          <Route
+            path={RoutePaths.Orders.ById._()}
+            exact
+            component={OrderDetailsPage}
+          />
           <Redirect path="*" to={RoutePaths.Products._()} />
         </Switch>
       </main>

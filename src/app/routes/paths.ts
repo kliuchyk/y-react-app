@@ -16,6 +16,9 @@ const RoutePaths = {
   },
   Orders: {
     _: pathCreator('/orders'),
+    ById: {
+      _: pathCreator<{ orderId: string }>('/orders/:orderId'),
+    },
   },
 };
 

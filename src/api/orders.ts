@@ -25,3 +25,11 @@ export const createNewOrder = async (orderItems: OrderItems) => {
   const data = await response.json();
   return data;
 };
+
+export const getOrderDetails = async (orderId: string) => {
+  const response = await fetch(`${baseURL}/orders/${orderId}`, {
+    headers,
+  });
+  const data = await response.json();
+  return data;
+};

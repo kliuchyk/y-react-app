@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CartProducts from '../../containers/CartProducts';
+import CartProducts from '../../cart/containers/CartProducts';
 import './styles.css';
 
 const ShoppingCartPage: React.FC = () => {

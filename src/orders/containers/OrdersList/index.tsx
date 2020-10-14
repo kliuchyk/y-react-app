@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Table } from 'antd';
+
 import { selectOrdersList } from '../../selectors';
 
 interface OrderListItem {
@@ -18,12 +20,15 @@ export default function OrdersList() {
       title: '#',
       dataIndex: 'number',
       key: 'number',
-      render: (id: string) => <a>{id}</a>,
+      render: (id: string) => <>{id}</>,
     },
     {
       title: 'Created At',
       dataIndex: 'createdAt',
       key: 'createdAt',
+      render: (date: string, orderItem: OrderListItem) => (
+        <Link to={`/orders/${orderItem.id}`}>{date}</Link>
+      ),
     },
   ];
 

@@ -8,14 +8,10 @@ import { startProductEdit } from '../../actions';
 import { Product } from '../../reducer';
 import './styles.css';
 
-export interface ProductCardProps extends Product {
-  hoverable?: boolean;
-}
-
 const { Meta } = Card;
 
-export default function ProductCard(props: ProductCardProps) {
-  const { id, name, price, origin, isEditable, hoverable = false } = props;
+export default function ProductCard(props: Product) {
+  const { id, name, price, origin, isEditable } = props;
   const dispatch = useDispatch();
 
   const addToCart = (e: MouseEvent): void => {
@@ -42,11 +38,7 @@ export default function ProductCard(props: ProductCardProps) {
   const cardAction = isEditable ? editProduct : addProductToCard;
 
   return (
-    <Card
-      hoverable={hoverable}
-      style={{ width: 300, margin: '20px' }}
-      actions={[cardAction]}
-    >
+    <Card style={{ width: 300, margin: '20px' }} actions={[cardAction]}>
       <Meta title={name} description={`Origin: ${origin}`} />
       <p>Pice: {price}</p>
     </Card>

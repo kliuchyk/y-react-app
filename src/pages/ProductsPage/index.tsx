@@ -37,7 +37,6 @@ function ProductsPage() {
               origin={product.origin}
               createdAt={product.createdAt}
               updatedAt={product.updatedAt}
-              hoverable
             />
           </Link>
         ))}
