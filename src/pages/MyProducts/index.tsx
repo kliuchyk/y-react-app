@@ -11,6 +11,7 @@ import { Product } from '../../products/reducer';
 import { selectProductItems } from '../../products/selectors';
 import { selectEditModalIsOpen } from '../../modals/selectors';
 import { cancelProductEdit } from '../../modals/actions';
+import { FIRST_PAGE } from '../../constants';
 
 function MyProductsPage() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function MyProductsPage() {
   const isModalOpen = useSelector(selectEditModalIsOpen);
 
   useEffect(() => {
-    dispatch(setCurrentPage(1, true));
+    dispatch(setCurrentPage(FIRST_PAGE, true));
   }, [dispatch]);
 
   const productsItems: Product[] = [...(Object.values(products) as Product[])];

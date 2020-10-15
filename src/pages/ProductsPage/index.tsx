@@ -8,6 +8,7 @@ import Pagination from '../../pagination/containers/Pagination';
 import FilterMenu from '../../filters/containers/FilterMenu';
 import { Product } from '../../products/reducer';
 import { selectProductItems } from '../../products/selectors';
+import { FIRST_PAGE } from '../../constants';
 import './styles.css';
 
 function ProductsPage() {
@@ -15,7 +16,7 @@ function ProductsPage() {
   const products = useSelector(selectProductItems);
 
   useEffect(() => {
-    dispatch(setCurrentPage(1, false));
+    dispatch(setCurrentPage(FIRST_PAGE, false));
   }, [dispatch]);
 
   const productsCopy: Product[] = [...(Object.values(products) as Product[])];

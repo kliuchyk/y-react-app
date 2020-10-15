@@ -5,6 +5,7 @@ import { PAGINATION_ACTION_TYPES } from './actionTypes';
 import { RequestProductsProps, getProducts } from '../api/products';
 import { setError, setProducts } from '../products/actions';
 import { setCurrentPage, setTotalItems } from './actions';
+import { FIRST_PAGE } from '../constants';
 
 type CurrentPageParams = { page: number; type: string; isEditable: boolean };
 
@@ -37,7 +38,7 @@ function* paginationSagaWorker({ page, isEditable }: CurrentPageParams) {
 }
 
 function* changePageSizeWorker({ isEditable }: CurrentPageParams) {
-  yield put(setCurrentPage(1, isEditable));
+  yield put(setCurrentPage(FIRST_PAGE, isEditable));
 }
 
 export default function* paginationSagaWatcher() {

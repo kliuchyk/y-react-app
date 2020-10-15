@@ -1,3 +1,4 @@
+import { ONE_PRODUCT_ITEM } from './constants';
 import { CART_ACTION_TYPES } from './actionTypes';
 
 export interface CartState {
@@ -32,7 +33,7 @@ export const cartReducer = (state = initialState, action: CartAction) => {
           name,
           price,
           origin,
-          count: state[productId] ? state[productId].count + 1 : 1,
+          count: state[productId] ? state[productId].count + ONE_PRODUCT_ITEM : ONE_PRODUCT_ITEM,
         },
       };
 
@@ -41,7 +42,7 @@ export const cartReducer = (state = initialState, action: CartAction) => {
         ...state,
         [action.productId]: {
           ...state[action.productId],
-          count: state[action.productId].count + 1,
+          count: state[action.productId].count + ONE_PRODUCT_ITEM,
         },
       };
     case CART_ACTION_TYPES.DECREMENT_PRODUCT:
@@ -50,7 +51,7 @@ export const cartReducer = (state = initialState, action: CartAction) => {
         ...state,
         [product]: {
           ...state[product],
-          count: state[product].count > 1 ? state[product].count - 1 : 1,
+          count: state[product].count > ONE_PRODUCT_ITEM ? state[product].count - ONE_PRODUCT_ITEM : ONE_PRODUCT_ITEM,
         },
       };
     case CART_ACTION_TYPES.DELETE_PRODUCT_FROM_CART:

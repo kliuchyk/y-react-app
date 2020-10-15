@@ -1,3 +1,4 @@
+import { FIRST_PAGE } from '../constants';
 import { NewProduct, EditProduct } from '../products/reducer';
 import { normalize } from '../utils/normalize';
 
@@ -14,7 +15,7 @@ export interface RequestProductsProps {
 const headers = {
   Authorization: `${apiKey}`,
   'Content-Type': 'application/json',
-}
+};
 
 export const getProducts = async (props: RequestProductsProps) => {
   const { origins = [], price = [], page, perPage = 10, isEditable = false } = props;
@@ -33,7 +34,7 @@ export const getProducts = async (props: RequestProductsProps) => {
     productsApi += `&minPrice=${minPrice}&maxPrice=${maxPrice}`;
   }
 
-  if (page && page !== 1) {
+  if (page && page !== FIRST_PAGE) {
     productsApi += `&page=${page}`;
   }
 
