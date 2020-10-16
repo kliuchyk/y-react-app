@@ -1,32 +1,49 @@
+import { Action } from '../types/actions';
 import { CART_ACTION_TYPES } from './actionTypes';
 import { CartProduct } from './reducer';
 
-export const addProduct = (product: CartProduct) => ({
-  type: CART_ACTION_TYPES.ADD_PRODUCT,
-  product,
+export type ProductId = { productId: string };
+export type ProductCount = { count: number, productId: string };
+
+type AddProductAction = Action<typeof CART_ACTION_TYPES.ADD_PRODUCT, CartProduct>
+type IncrementProductAction = Action<typeof CART_ACTION_TYPES.ADD_PRODUCT, ProductId>
+type DecrementProductAction = Action<typeof CART_ACTION_TYPES.DECREMENT_PRODUCT, ProductId>
+type DeleteFromCartAction = Action<typeof CART_ACTION_TYPES.DELETE_PRODUCT_FROM_CART, ProductId>
+type ChangeProductCountAction = Action<typeof CART_ACTION_TYPES.CHANGE_PRODUCT_COUNT, ProductCount>
+type EmptyCartAction = Action<typeof CART_ACTION_TYPES.EMPTY_CART>
+
+export type CartActionTypes =
+  | AddProductAction
+  | IncrementProductAction
+  | DecrementProductAction
+  | DeleteFromCartAction
+  | ChangeProductCountAction
+  | EmptyCartAction;
+
+export const addProduct = (payload: CartProduct): CartActionTypes => ({
+  type: typeof CART_ACTION_TYPES.ADD_PRODUCT,
+  payload
 });
 
-export const incrementProduct = (productId: string) => ({
+export const incrementProduct = (payload: ProductId): CartActionTypes => ({
   type: CART_ACTION_TYPES.INCREMENT_PRODUCT,
-  productId,
-});
+  payload
+})
 
-export const decrementProduct = (productId: string) => ({
+export const decrementProduct = (payload: ProductId): CartActionTypes => ({
   type: CART_ACTION_TYPES.DECREMENT_PRODUCT,
-  productId,
-});
-
-export const deleteFromCart = (productId: string) => ({
+  payload
+})
+export const deleteFromCart = (payload: ProductId): CartActionTypes => ({
   type: CART_ACTION_TYPES.DELETE_PRODUCT_FROM_CART,
-  productId,
-});
+  payload
+})
 
-export const changeProductCount = (count: number, productId: string) => ({
+export const changeProductCount = (payload: ProductCount): CartActionTypes => ({
   type: CART_ACTION_TYPES.CHANGE_PRODUCT_COUNT,
-  count,
-  productId,
+  payload
 });
 
-export const emptyCart = () => ({
+export const emptyCart = (): CartActionTypes => ({
   type: CART_ACTION_TYPES.EMPTY_CART,
 });

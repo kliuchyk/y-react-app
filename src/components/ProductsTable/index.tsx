@@ -46,19 +46,26 @@ export default function ProductsTable(props: any) {
       render: (text: string, record: CartProduct) => (
         <Space size="middle">
           <MinusCircleOutlined
-            onClick={() => dispatch(decrementProduct(record.productId))}
+            onClick={() =>
+              dispatch(decrementProduct({ productId: record.productId }))
+            }
           />
           <Input
             className="count-input"
             value={record.count}
             onChange={(e) =>
               dispatch(
-                changeProductCount(parseInt(e.target.value), record.productId)
+                changeProductCount({
+                  productId: record.productId,
+                  count: parseInt(e.target.value),
+                })
               )
             }
           />
           <PlusCircleOutlined
-            onClick={() => dispatch(incrementProduct(record.productId))}
+            onClick={() =>
+              dispatch(incrementProduct({ productId: record.productId }))
+            }
           />
         </Space>
       ),
@@ -74,7 +81,10 @@ export default function ProductsTable(props: any) {
       key: 'delete',
       render: (text: string, record: CartProduct) => (
         <Space size="middle">
-          <Button danger onClick={() => dispatch(deleteFromCart(record.productId))}>
+          <Button
+            danger
+            onClick={() => dispatch(deleteFromCart({ productId: record.productId }))}
+          >
             Delete
           </Button>
         </Space>
