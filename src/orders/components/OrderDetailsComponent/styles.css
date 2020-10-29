@@ -1,0 +1,12 @@
+.order-details {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.product-container {
+  margin-bottom: 20px;
+}
+
+.product-name {
+  font-weight: bold;
+}

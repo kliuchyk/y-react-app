@@ -11,6 +11,15 @@ const RoutePaths = {
       _: pathCreator<{ productId: string }>('/products/:productId'),
     },
   },
+  MyProducts: {
+    _: pathCreator('/my-products'),
+  },
+  Orders: {
+    _: pathCreator('/orders'),
+    ById: {
+      _: pathCreator<{ orderId: string }>('/orders/:orderId'),
+    },
+  },
 };
 
 export default RoutePaths;

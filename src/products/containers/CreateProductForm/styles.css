@@ -1,0 +1,38 @@
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  align-items: center;
+}
+
+.add-product-form input,
+.add-product-form select {
+  outline: none;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 7px 15px;
+  width: 70%;
+}
+
+.add-product-form input:disabled,
+.add-product-form select:disabled,
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.add-product-form .form-actions {
+  margin: 30px 0;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-error {
+  color: red;
+}

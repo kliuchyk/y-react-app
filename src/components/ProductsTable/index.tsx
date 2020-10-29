@@ -1,15 +1,27 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Table } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { Table, Space, Button, Input } from 'antd';
+import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 import {
   selectPickedProductsCount,
   selectCartTotalPrice,
-} from '../../app/redux/selectors';
+  selectPickedProductsList,
+} from '../../cart/selectors';
+import {
+  deleteFromCart,
+  decrementProduct,
+  incrementProduct,
+  changeProductCount,
+} from '../../cart/actions';
+import './styles.css';
+import { CartProduct } from '../../cart/reducer';
 
 export default function ProductsTable(props: any) {
+  const cartProducts = useSelector(selectPickedProductsList);
   const productsCount = useSelector(selectPickedProductsCount);
   const totalPrice = useSelector(selectCartTotalPrice);
+  const dispatch = useDispatch();
 
   const columns = [
     {
@@ -28,14 +40,55 @@ export default function ProductsTable(props: any) {
       key: 'price',
     },
     {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
+      title: 'Count',
+      dataIndex: 'count',
+      key: 'count',
+      render: (text: string, record: CartProduct) => (
+        <Space size="middle">
+          <MinusCircleOutlined
+            onClick={() =>
+              dispatch(decrementProduct({ productId: record.productId }))
+            }
+          />
+          <Input
+            className="count-input"
+            value={record.count}
+            onChange={(e) =>
+              dispatch(
+                changeProductCount({
+                  productId: record.productId,
+                  count: parseInt(e.target.value),
+                })
+              )
+            }
+          />
+          <PlusCircleOutlined
+            onClick={() =>
+              dispatch(incrementProduct({ productId: record.productId }))
+            }
+          />
+        </Space>
+      ),
     },
     {
       title: 'Total price for product',
       dataIndex: 'totalPrice',
       key: 'totalPrice',
+    },
+    {
+      title: 'Remove from cart',
+      dataIndex: 'delete',
+      key: 'delete',
+      render: (text: string, record: CartProduct) => (
+        <Space size="middle">
+          <Button
+            danger
+            onClick={() => dispatch(deleteFromCart({ productId: record.productId }))}
+          >
+            Delete
+          </Button>
+        </Space>
+      ),
     },
   ];
 
@@ -49,7 +102,7 @@ export default function ProductsTable(props: any) {
   return (
     <Table
       columns={columns}
-      dataSource={props.products}
+      dataSource={cartProducts}
       footer={() => (
         <TableFooter totalPrice={totalPrice} totalCount={productsCount} />
       )}

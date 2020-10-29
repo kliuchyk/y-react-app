@@ -1,0 +1,1 @@
+export const ONE_PRODUCT_ITEM = 1;
